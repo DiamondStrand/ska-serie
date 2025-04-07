@@ -17,7 +17,10 @@
 		{ src: '/images/scen004.png', caption: 'Scene 4' },
 		{ src: '/images/scen005.png', caption: 'Scene 5' },
 		{ src: '/images/scen006.png', caption: 'Scene 6' },
-		{ src: '/images/scen007.png', caption: 'Scene 7' }
+		{ src: '/images/scen007.png', caption: 'Scene 7' },
+		{ src: '/images/scen008.png', caption: 'Scene 8' },
+		{ src: '/images/scen009.png', caption: 'Scene 9' },
+		{ src: '/images/scen010.png', caption: 'Scene 10' }
 	];
 
 	function goToPage(index: number) {
@@ -38,6 +41,16 @@
 		} else if (event.key === 'End') {
 			swiper.slideTo(pages.length - 1);
 		}
+	}
+
+	// Function to handle image download
+	function downloadImage(src: string, caption: string) {
+		const link = document.createElement('a');
+		link.href = src;
+		link.download = caption.replace(/\s+/g, '_').toLowerCase() + '.png';
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
 	}
 
 	onMount(() => {
@@ -83,12 +96,33 @@
 		<div class="swiper mb-8 h-[70vh] w-full">
 			<div class="swiper-wrapper">
 				{#each pages as page, i}
-					<div class="swiper-slide flex items-center justify-center">
+					<div class="swiper-slide relative flex items-center justify-center">
 						<img
 							src={page.src}
 							alt={page.caption}
 							class="max-h-[70vh] max-w-full rounded-lg object-contain"
 						/>
+						<button
+							class="download-btn"
+							onclick={(e) => {
+								e.stopPropagation();
+								downloadImage(page.src, page.caption);
+							}}
+							title="Download {page.caption}"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								class="h-5 w-5"
+								viewBox="0 0 20 20"
+								fill="currentColor"
+							>
+								<path
+									fill-rule="evenodd"
+									d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</button>
 					</div>
 				{/each}
 			</div>
@@ -192,6 +226,33 @@
 			opacity: 0.5;
 			transform: translateY(0);
 		}
+	}
+
+	/* Download button styling */
+	.download-btn {
+		position: absolute;
+		bottom: 3rem;
+		right: 2rem;
+		background-color: rgba(0, 0, 0, 0.5);
+		color: white;
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: none;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		opacity: 0.6;
+		z-index: 10;
+	}
+
+	.download-btn:hover {
+		opacity: 1;
+		background-color: rgba(67, 97, 238, 0.8);
+		transform: scale(1.1);
+		box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 	}
 
 	/* Swiper customization */
