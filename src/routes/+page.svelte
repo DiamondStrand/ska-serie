@@ -109,6 +109,7 @@
 								downloadImage(page.src, page.caption);
 							}}
 							title="Download {page.caption}"
+							aria-label="Download {page.caption}"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -290,11 +291,7 @@
 
 	/* Fix for small screens to ensure navigation dots are visible and tappable */
 	@media (max-width: 480px) {
-		.mx-auto.flex.gap-2.p-2 {
-			flex-wrap: wrap;
-			justify-content: center;
-			gap: 0.5rem;
-		}
+		/* Removed unused CSS selector */
 	}
 
 	/* Swiper customization */
