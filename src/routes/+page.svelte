@@ -89,11 +89,11 @@
 	<div class="stars3"></div>
 </div>
 
-<main class="relative z-10 flex h-screen w-full flex-col items-center justify-center p-4">
+<main class="relative z-10 flex h-screen w-full flex-col items-center justify-center p-4 sm:p-2">
 	<div
-		class="flex w-full max-w-7xl flex-col items-center rounded-2xl bg-gray-700/40 p-4 shadow-xl transition-all duration-300 md:p-8"
+		class="flex w-full max-w-7xl flex-col items-center rounded-2xl bg-gray-700/40 p-4 shadow-xl transition-all duration-300 sm:p-2 md:p-6"
 	>
-		<div class="swiper mb-8 h-[70vh] w-full">
+		<div class="swiper mb-0 w-full sm:h-[60vh] md:mb-8 lg:h-[65vh]">
 			<div class="swiper-wrapper">
 				{#each pages as page, i}
 					<div class="swiper-slide relative flex items-center justify-center">
@@ -132,12 +132,12 @@
 		</div>
 
 		<div
-			class="mt-4 flex w-full max-w-3xl items-center justify-between rounded-full bg-gray-500 p-2"
+			class="pagination-container mt-2 flex w-full max-w-3xl items-center justify-between rounded-full bg-gray-500 p-1 sm:p-2 md:mt-4"
 		>
-			<div class="mx-auto flex gap-2 p-2">
+			<div class="mx-auto flex flex-wrap justify-center gap-1 p-1 sm:gap-2 sm:p-2">
 				{#each pages as page, i}
 					<button
-						class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-2 border-gray-500 bg-black font-semibold text-gray-100 transition-all duration-200 hover:scale-105 hover:bg-blue-800 {currentPage ===
+						class="flex h-8 w-8 cursor-pointer items-center justify-center rounded-full border-2 border-gray-500 bg-black font-semibold text-gray-100 transition-all duration-200 hover:scale-105 hover:bg-blue-800 sm:h-9 sm:w-9 {currentPage ===
 						i
 							? 'scale-110 border-blue-600 bg-blue-900 text-white shadow-md'
 							: ''}"
@@ -231,33 +231,80 @@
 	/* Download button styling */
 	.download-btn {
 		position: absolute;
-		bottom: 3rem;
-		right: 2rem;
+		bottom: 1rem;
+		right: 1rem;
 		background-color: rgba(0, 0, 0, 0.5);
 		color: white;
 		border-radius: 50%;
-		width: 40px;
-		height: 40px;
+		width: 44px;
+		height: 44px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		border: none;
 		cursor: pointer;
 		transition: all 0.2s ease;
-		opacity: 0.6;
+		opacity: 0.8;
 		z-index: 10;
+		/* Add drop shadow to enhance visibility on light backgrounds */
+		filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 	}
 
-	.download-btn:hover {
+	.download-btn:hover,
+	.download-btn:active {
 		opacity: 1;
-		background-color: rgba(67, 97, 238, 0.8);
+		background-color: rgba(67, 97, 238, 0.9);
 		transform: scale(1.1);
 		box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+	}
+
+	/* Mobile optimizations */
+	@media (max-width: 768px) {
+		.download-btn {
+			width: 48px;
+			height: 48px;
+			bottom: 0.75rem;
+			right: 0.75rem;
+		}
+
+		.download-btn svg {
+			width: 1.5rem;
+			height: 1.5rem;
+		}
+
+		/* Hide pagination on mobile devices */
+		.pagination-container {
+			display: none;
+		}
+
+		:global(.swiper-button-next),
+		:global(.swiper-button-prev) {
+			transform: scale(0.7);
+		}
+
+		:global(.swiper-button-next::after),
+		:global(.swiper-button-prev::after) {
+			font-size: 1.5rem !important;
+		}
+	}
+
+	/* Fix for small screens to ensure navigation dots are visible and tappable */
+	@media (max-width: 480px) {
+		.mx-auto.flex.gap-2.p-2 {
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 0.5rem;
+		}
 	}
 
 	/* Swiper customization */
 	:global(.swiper-button-next),
 	:global(.swiper-button-prev) {
 		color: white;
+		background-color: rgba(0, 0, 0, 0.3);
+		padding: 1.5rem;
+		border-radius: 50%;
+		width: 2.5rem;
+		height: 2.5rem;
 	}
 </style>
