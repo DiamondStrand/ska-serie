@@ -91,7 +91,7 @@
 
 <main class="relative z-10 flex h-screen w-full flex-col items-center justify-center p-4 sm:p-2">
 	<div
-		class="flex w-full max-w-7xl flex-col items-center rounded-2xl bg-gray-700/40 p-4 shadow-xl transition-all duration-300 sm:p-2 md:p-6"
+		class="flex w-full max-w-5xl flex-col items-center rounded-2xl bg-gray-700/40 p-4 shadow-xl transition-all duration-300 sm:p-2 md:p-6"
 	>
 		<div class="swiper mb-0 w-full sm:h-[60vh] md:mb-8 lg:h-[65vh]">
 			<div class="swiper-wrapper">
